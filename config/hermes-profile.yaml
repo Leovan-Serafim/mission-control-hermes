@@ -1,0 +1,101 @@
+# Hermes Profile Config — Mission Control Integration
+# Copie para ~/.hermes/profiles/mission-control/config.yaml
+# Edite os valores marcados com SEU_VALOR_AQUI
+
+_config_version: 50
+
+# ─── Model ──────────────────────────────────────────────────────────────
+model:
+  default: "nvidia/nemotron-3-ultra-550b-a55b"
+  provider: "nvidia"
+  base_url: "https://integrate.api.nvidia.com/v1"
+  # NVIDIA_API_KEY vai no .env do perfil
+
+# ─── Agent ──────────────────────────────────────────────────────────────
+agent:
+  max_turns: 150
+  reasoning_effort: "medium"
+  verify_on_stop: false
+
+# ─── Display ────────────────────────────────────────────────────────────
+display:
+  interface: cli
+  language: pt-BR
+  skin: "default"
+
+# ─── Memory ─────────────────────────────────────────────────────────────
+memory:
+  memory_enabled: true
+  user_profile_enabled: true
+  nudge_interval: 10
+
+# ─── Voice (STT/TTS) ────────────────────────────────────────────────────
+stt:
+  enabled: true
+  provider: "local"
+  language: "pt-BR"
+  local:
+    model: "base"
+    language: "pt-BR"
+    vad: true
+    vad_min_silence_ms: 500
+    no_speech_prob_threshold: 0.6
+    logprob_threshold: -1.0
+
+tts:
+  provider: "voicestudio"
+  voicestudio:
+    base_url: "http://127.0.0.1:3900"
+    default_voice: ""
+    timeout_s: 600
+
+# ─── Toolsets (Mission Control precisa destes) ──────────────────────────
+platform_toolsets:
+  cli: [browser, clarify, code_execution, computer_use, connections, cronjob, delegation, file, kanban, memory, session_search, skills, terminal, todo, tts, vision, web]
+
+# ─── Compression ────────────────────────────────────────────────────────
+compression:
+  enabled: true
+  threshold: 0.50
+  target_ratio: 0.20
+  protect_last_n: 20
+
+# ─── Kanban ─────────────────────────────────────────────────────────────
+kanban:
+  review_dispatch: true
+
+# ─── Auxiliary Models (Vision, Compression, etc.) ───────────────────────
+# Configure se tiver OpenRouter/Google API key para vision
+# auxiliary:
+#   vision:
+#     provider: "openrouter"
+#     model: "google/gemini-2.5-flash"
+#   compression:
+#     provider: "openrouter"
+#     model: "google/gemini-2.5-flash"
+
+# ─── Mission Control Bridge Config ─────────────────────────────────────
+# Estas variáveis são lidas pelo bridge (hermes-bridge/bridge.mjs)
+# Defina no .env do perfil ou como variáveis de ambiente do sistema
+hermes_bridge:
+  # DATABASE_URL: mesmo do dashboard Vercel (postgresql:// direto)
+  # INTERNAL_API_SECRET: openssl rand -hex 32
+  board: "default"
+  poll_ms: 5000
+  mirror_ms: 30000
+  run_timeout_ms: 240000
+  wiki_path: "~/.hermes/wiki"
+  brief_hour: 8
+  # internal_api_secret: "SEU_SECRET_AQUI"
+
+# ─── Skills Auto-load ───────────────────────────────────────────────────
+skills:
+  creation_nudge_interval: 15
+  # Skills Mission Control carregadas automaticamente via onboarding skill
+
+# ─── Gateway (se rodar gateway local) ───────────────────────────────────
+gateway:
+  signal_interrupt_grace_timeout: 1
+  delivery_ledger: true
+  scale_to_zero:
+    idle_timeout_minutes: 2

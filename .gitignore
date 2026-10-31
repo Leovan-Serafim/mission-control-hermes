@@ -1,0 +1,63 @@
+# Mission Control Hermes — .gitignore
+# Segredos e arquivos locais
+
+# Environment files with secrets
+.env
+.env.*
+*.env.local
+*.env.*.local
+
+# Bridge logs
+*.log
+logs/
+C:\logs\
+
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+env/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Hermes local data
+*.db
+*.db-shm
+*.db-wal
+state.db*
+
+# Backup files
+*.bak
+*.backup
+*~
+
+# Temporary files
+*.tmp
+*.temp
+.tmp/
+
+# Coverage
+coverage/
+.nyc_output/
+
+# Build outputs
+dist/
+build/
+.next/
+out/

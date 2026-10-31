@@ -1,0 +1,27 @@
+# Hermy HQ Bridge — Configuração Extra para Mission Control
+# Copie para o diretório do bridge (hermes-bridge/) e ajuste os valores
+
+# Database (OBRIGATORIO - mesmo do dashboard Vercel)
+# Use connection string DIRETA postgres:// (NAO prisma:// ou Accelerate)
+DATABASE_URL: "postgresql://user:pass@host:5432/db?sslmode=require"
+
+# Bridge Behavior
+HERMES_BOARD: "default"
+BRIDGE_POLL_MS: 5000
+BRIDGE_MIRROR_MS: 30000
+BRIDGE_RUN_TIMEOUT_MS: 240000
+# HERMES_BIN: "hermes"
+
+# Memory Wiki
+HERMES_WIKI: "~/.hermes/wiki"
+
+# Daily Brief
+BRIEF_HOUR: 8
+
+# Internal API Secret (OBRIGATORIO para callbacks seguros)
+# Gere com: openssl rand -hex 32
+INTERNAL_API_SECRET: "your-32-byte-hex-secret-here"
+
+# Logging
+# BRIDGE_LOG_LEVEL: "info"
+# BRIDGE_LOG_FILE: "/var/log/hermes-bridge.log"
